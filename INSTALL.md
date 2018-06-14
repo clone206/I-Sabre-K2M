@@ -48,8 +48,8 @@ Choose place of kernel source files & directory, e.g. '.' current folder.
 
 ### 2. Pull driver source files
 
-T.B.D.
-
+    git clone https://github.com/audiophonics/I-Sabre-K2M
+    
 ### 3. Build & Install driver & dtb (device tree blob)
 
     cd ./I-Sabre-K2M
