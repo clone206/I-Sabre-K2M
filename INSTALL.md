@@ -34,6 +34,8 @@ See: https://www.raspberrypi.com/documentation/computers/linux_kernel.html#build
 
 Clone next to this folder. Follow instructions for building and installing the kernel. Reboot.
 
+If necessary, remove the version of the i-sabre-codec from the modules directory that was created above, as it may have a different name, and may conflict with the one we want for this driver.
+
 ## Driver Install
 
 ### 1. Pull driver source files
