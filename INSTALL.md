@@ -1,73 +1,64 @@
 # Device Driver Install Manual
 
 ## Prerequisites
-* Kernel Source
-* dtc (Device Tree Compiler)
-* GCC 4.9.2 (to matching for running linux kernel image)
 
-### Getting Kernel Source
-Install "rpi-source" software.  
-The "rpi-source" command automaticaly downloads the kernel source that matched running linux kernel version.
-
-https://github.com/notro/rpi-source/wiki
-
-to install:
-
-    sudo wget https://raw.githubusercontent.com/notro/rpi-source/master/rpi-source -O /usr/bin/rpi-source && sudo chmod +x /usr/bin/rpi-source && /usr/bin/rpi-source -q --tag-update
+- Kernel Source
+- dtc (Device Tree Compiler)
+- GCC (version matching compiled linux kernel image)
 
 ### Getting dtc (Device Tree Compiler) package
+
 Install dtc by package system.
 
     sudo apt-get install device-tree-compiler
 
 ### Install bc command
+
 If bc is not installed, must install bc.
 
     sudo apt-get install bc
 
-### Getting GCC-4.9.2 package (Kernel Version : ~ 4.1.17+)
-Install GCC-4.9.x by package system.
+### Getting GCC
 
-    sudo apt-get install gcc-4.9 g++-4.9
+Install GCC by package system.
 
-Check GCC version is 4.9.x.
+    sudo apt-get install gcc
+
+Check GCC version
 
     gcc --version
 
-Check gcc version to build the running linux kernel image. 
+### Getting Kernel Source
 
-    cat /proc/version
+See: https://www.raspberrypi.com/documentation/computers/linux_kernel.html#building-the-kernel-locally
+
+Clone next to this folder. Follow instructions for building and installing the kernel. Reboot.
 
 ## Driver Install
 
-### 1. Get the kernel source
-
-Choose place of kernel source files & directory, e.g. '.' current folder.
-
-    rpi-source -d .
-
-### 2. Pull driver source files
+### 1. Pull driver source files
 
     git clone https://github.com/audiophonics/I-Sabre-K2M
-    
-### 3. Build & Install driver & dtb (device tree blob)
 
-    cd ./I-Sabre-K2M
+    Check out 6.6.y branch.
+
+### 2. Build & Install driver & dtb (device tree blob)
+
     make
     sudo make modules_install
     make dtbs
     sudo make install_dtbo
 
-### 4. Change /boot/config.txt
+### 3. Change /boot/config.txt
 
 Add following lines.
 
     dtoverlay=i-sabre-k2m
     dtparam=i2c_arm=on
 
-### 5. Reboot Raspberry Pi
+### 4. Reboot Raspberry Pi
 
-### 6. Check driver is normaly installed
+### 5. Check driver is normaly installed
 
 Use aplay -l command to check audio card is added.
 
