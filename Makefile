@@ -1,14 +1,14 @@
-KERNEL_SRC = /lib/modules/$(shell uname -r)/source
+KERNEL_SRC = $(shell pwd)/../linux
 BUILD_DIR := $(shell pwd)
-DTC_DIR = /lib/modules/$(shell uname -r)/build/scripts/dtc/
-VERBOSE = 0
+DTC_DIR = /usr/bin
+VERBOSE = 1
 
 OBJS    = i-sabre-codec.o i-sabre-k2m.o
 
 obj-m := $(OBJS)
 
 all:
-	make -C $(KERNEL_SRC) SUBDIRS=$(BUILD_DIR) KBUILD_VERBOSE=$(VERBOSE) modules
+	make -C $(KERNEL_SRC) M=$(BUILD_DIR) KBUILD_VERBOSE=$(VERBOSE) modules
 
 clean:
 	make -C $(KERNEL_SRC) SUBDIRS=$(BUILD_DIR) clean
@@ -41,7 +41,7 @@ remove:
 install_dtb:
 	cp i-sabre-k2m-overlay.dtb /boot/overlays/
 
-# Kernel 4.4.y
+# Kernel 6.6.y
 install_dtbo:
 	cp i-sabre-k2m.dtbo /boot/overlays/
 
